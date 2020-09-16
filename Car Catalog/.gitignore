@@ -1,0 +1,5 @@
+# Finder files
+.DS_Store
+
+# User settings
+xcuserdata/

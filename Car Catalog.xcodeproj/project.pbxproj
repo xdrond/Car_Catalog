@@ -13,6 +13,7 @@
 		E24C0A0625123A220049A16F /* Car_Catalog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E24C0A0425123A220049A16F /* Car_Catalog.xcdatamodeld */; };
 		E24C0A0825123A220049A16F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E24C0A0725123A220049A16F /* Assets.xcassets */; };
 		E24C0A0B25123A220049A16F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E24C0A0925123A220049A16F /* LaunchScreen.storyboard */; };
+		E24C0A1325123AF40049A16F /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E24C0A1225123AF40049A16F /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		E24C0A0725123A220049A16F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E24C0A0A25123A220049A16F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E24C0A0C25123A220049A16F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E24C0A1225123AF40049A16F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +58,40 @@
 		E24C09FC25123A220049A16F /* Car Catalog */ = {
 			isa = PBXGroup;
 			children = (
-				E24C09FD25123A220049A16F /* AppDelegate.swift */,
-				E24C09FF25123A220049A16F /* ViewController.swift */,
-				E24C0A0125123A220049A16F /* Main.storyboard */,
-				E24C0A0725123A220049A16F /* Assets.xcassets */,
-				E24C0A0925123A220049A16F /* LaunchScreen.storyboard */,
+				E24C0A1425123CAA0049A16F /* Model */,
+				E24C0A1525123CB60049A16F /* View */,
+				E24C0A1625123CC60049A16F /* Controller */,
 				E24C0A0C25123A220049A16F /* Info.plist */,
-				E24C0A0425123A220049A16F /* Car_Catalog.xcdatamodeld */,
+				E24C0A1225123AF40049A16F /* .gitignore */,
 			);
 			path = "Car Catalog";
+			sourceTree = "<group>";
+		};
+		E24C0A1425123CAA0049A16F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E24C0A0425123A220049A16F /* Car_Catalog.xcdatamodeld */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E24C0A1525123CB60049A16F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E24C0A0925123A220049A16F /* LaunchScreen.storyboard */,
+				E24C0A0125123A220049A16F /* Main.storyboard */,
+				E24C0A0725123A220049A16F /* Assets.xcassets */,
+				E24C09FF25123A220049A16F /* ViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E24C0A1625123CC60049A16F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E24C09FD25123A220049A16F /* AppDelegate.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +152,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E24C0A1325123AF40049A16F /* .gitignore in Resources */,
 				E24C0A0B25123A220049A16F /* LaunchScreen.storyboard in Resources */,
 				E24C0A0825123A220049A16F /* Assets.xcassets in Resources */,
 				E24C0A0325123A220049A16F /* Main.storyboard in Resources */,
@@ -296,7 +324,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.xdrondrr.Car-Catalog";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -314,7 +342,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.xdrondrr.Car-Catalog";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
