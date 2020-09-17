@@ -10,8 +10,16 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var modelController: ModelController!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        modelController = ModelController()
+        guard (modelController != nil) else {
+            fatalError("VC не получил контроллер модели!")
+        }
+        
+        modelController.retrieveData()
         // Do any additional setup after loading the view.
     }
 
