@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  Car Catalog
 //
-//  Created by xdrond on 16.09.2020.
+//  Created by xdrond.
 //  Copyright © 2020 romanromanov. All rights reserved.
 //
 
@@ -12,14 +12,16 @@ class ViewController: UIViewController {
 
     var modelController: ModelController!
 
+    var cars: [CarMO]?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         modelController = ModelController()
-        guard (modelController != nil) else {
-            fatalError("VC не получил контроллер модели!")
+
+        // MARK: - Test code, will be removed.
+        for auto in modelController.retrieveData()! {
+            print("\(auto.brand) - \(auto.model)")
         }
-        
-        modelController.retrieveData()
         // Do any additional setup after loading the view.
     }
 

@@ -2,93 +2,165 @@
 //  ModelController.swift
 //  Car Catalog
 //
-//  Created by xdrond on 16.09.2020.
+//  Created by xdrond.
 //  Copyright © 2020 romanromanov. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class ModelController {
 
-    // Persistent container from AppDelegate.
-    static var persistentContainer: NSPersistentContainer! = {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return nil }
+/// ModelController can be rewritten with less dependence on the CarMO class.
+struct ModelController {
+
+    /// Container is set up in the AppDelegates so we need to refer that container.
+    /// Fatal error if the AppDelegate is unavailable.
+    private static var persistentContainer: NSPersistentContainer = {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            fatalError("No access to the container from \(#file), line: \(#line).")
+        }
         return appDelegate.persistentContainer
     }()
 
+    /**
+     The method receives CarMO:NSManagedObject and loads it to the storage via newBackgroundContext(). Printing error in case saving fails.
+     - parameter carObject:CarMO NSManagedObject for saving.
+     */
+    func createCar(brand: String, model: String, bodyStyle: String?, manufactureYear: String?) {
 
-    func createDefaultData() {
-        guard let persistentContainer = ModelController.persistentContainer else { fatalError("Не удаётся получить доступ к контейнеру из метода createDefaultData()") }
+        ModelController.persistentContainer.newBackgroundContext()
 
-        persistentContainer.newBackgroundContext()
+        // Create a context from persistentContainer.
+        let managedContext = ModelController.persistentContainer.viewContext
 
-        //We need to create a context from this container
-        let managedContext = persistentContainer.viewContext
-
-        //Now let’s create an entity and new user records.
-        let carEntity = NSEntityDescription.entity(forEntityName: "Car", in: managedContext)!
-
-        //final, we need to add some data to our newly created record for each keys using
-        //here adding 5 data with loop
-
-        for _ in 1...6 {
-            let car = NSManagedObject(entity: carEntity, insertInto: managedContext)
-            car.setValue(carBrands.randomElement(), forKeyPath: "brand")
-            car.setValue(carModels.randomElement(), forKey: "model")
-            car.setValue(carBodyStyles.randomElement(), forKey: "bodyStyle")
-            car.setValue(carManufactureYears.randomElement(), forKey: "manufactureYear")
-        }
-
-        //Now we have set all the values. The next step is to save them inside the Core Data
+        let newCar = CarMO(context: managedContext)
+        newCar.brand = brand
+        newCar.model = model
+        newCar.bodyStyle = bodyStyle
+        newCar.manufactureYear = manufactureYear
+        managedContext.insert(newCar)
 
         do {
             print("managedContext: \(managedContext.insertedObjects)")
             try managedContext.save()
 
         } catch let error as NSError {
-            print("Could not save. \(error), \(error.userInfo)")
+            print("Data could not be saved. \(error), \(error.userInfo)")
         }
     }
 
-    func retrieveData() {
+    /**
+     The method creates Car:NSManagedObject objects and fills them with random data. Printing error in case saving fails.
+     - parameter numberOfObjects:UInt Number of generated objects or nothing(default 6).
+     */
+    func createDefaultData(numberOfObjects: UInt = 6) {
 
-        guard let persistentContainer = ModelController.persistentContainer else { fatalError("Не удаётся получить доступ к контейнеру из метода createDefaultData()") }
+        ModelController.persistentContainer.newBackgroundContext()
 
-        //We need to create a context from this container
-        let managedContext = persistentContainer.viewContext
+        // Create a context from this container.
+        let managedContext = ModelController.persistentContainer.viewContext
 
-        //Prepare the request of type NSFetchRequest  for the entity
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Car")
+        //  Creating Car:NSManagedObject objects and fill them with random data.
+        for _ in 1...numberOfObjects {
+            let car = CarMO(context: managedContext)
+            car.brand = carBrands.randomElement()!
+            car.model = carModels.randomElement()!
+            car.bodyStyle = carBodyStyles.randomElement()!
+            car.manufactureYear = carManufactureYears.randomElement()!
+        }
+
+        // Set all the values. The next step is to save them inside the Core Data.
+
+        do {
+            print("managedContext: \(managedContext.insertedObjects)")
+            try managedContext.save()
+
+        } catch let error as NSError {
+            print("Data could not be saved. \(error), \(error.userInfo)")
+        }
+    }
+
+    /**
+     The method asks for actual data and returns the list of objects. Printing error in case fetching fails.
+     - returns:[Car]? Array of objects from the storage or nil.
+     */
+    func retrieveData() -> [CarMO]? {
+
+        // Create a context from persistentContainer.
+        let managedContext = ModelController.persistentContainer.viewContext
+
+        //Prepare the request of type NSFetchRequest for the entity.
+        let fetchRequest = CarMO.carFetchRequest()
 
         do {
             let result = try managedContext.fetch(fetchRequest)
-            for data in result as! [NSManagedObject] {
-                print(data.value(forKey: "brand") as! String)
-            }
+            return result
 
-        } catch {
-
-            print("Failed")
+        } catch let error as NSError {
+            print("Data could not be found. \(error), \(error.userInfo)")
         }
+        return nil
     }
 
-    func deleteData(){
 
-        //As we know that container is set up in the AppDelegates so we need to refer that container.
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+    /**
+     The method searches for the specified car in the storage and updates the specified data.
+     - bug: Fatal error if the described car is not in the storage.
+     */
+    func updateData(brand: String, model: String, bodyStyle: String?, manufactureYear: String?) {
 
-        //We need to create a context from this container
-        let managedContext = appDelegate.persistentContainer.viewContext
+        // Create a context from persistentContainer.
+        let managedContext = ModelController.persistentContainer.viewContext
 
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
-        fetchRequest.predicate = NSPredicate(format: "username = %@", "Ankur3")
+        //Prepare the request of type NSFetchRequest for the entity.
+        let fetchRequest = CarMO.carFetchRequest()
+
+        fetchRequest.predicate = NSPredicate(format: "brand == %@ AND model == %@ AND bodyStyle == %@ AND manufactureYear == %@", brand, model, bodyStyle ?? "", manufactureYear ?? "")
+        do
+        {
+            let test = try managedContext.fetch(fetchRequest)
+
+            // MARK: - Test code, will be removed.
+
+            let updCar = test[0] as! CarMO
+            updCar.brand = "New updated " + brand
+            updCar.model = "New updated " + model
+            updCar.bodyStyle = "New updated " + (bodyStyle ?? "")
+            updCar.manufactureYear = "New updated " + (manufactureYear ?? "")
+            managedContext.insert(updCar)
+            do{
+                try managedContext.save()
+            }
+            catch
+            {
+                print(error)
+            }
+        }
+        catch
+        {
+            print(error)
+        }
+
+    }
+
+    /**
+     The method searches in the storage and deletes the specified car.
+     - bug: Fatal error if the described car is not in the storage.
+     */
+    func deleteData(brand: String, model: String, bodyStyle: String?, manufactureYear: String?){
+
+        // Create a context from persistentContainer.
+        let managedContext = ModelController.persistentContainer.viewContext
+
+        let fetchRequest = CarMO.carFetchRequest()
+
+        fetchRequest.predicate = NSPredicate(format: "brand == %@ AND model == %@ AND bodyStyle == %@ AND manufactureYear == %@", brand, model, bodyStyle ?? "", manufactureYear ?? "")
 
         do
         {
             let test = try managedContext.fetch(fetchRequest)
 
-            let objectToDelete = test[0] as! NSManagedObject
+            let objectToDelete = test[0] as! CarMO
             managedContext.delete(objectToDelete)
 
             do{

@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  Car Catalog
 //
-//  Created by xdrond on 16.09.2020.
+//  Created by xdrond.
 //  Copyright © 2020 romanromanov. All rights reserved.
 //
 
@@ -23,7 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // A place for actions on the first launch.
         if runCounter() == 1 {
-            ModelController().createDefaultData()
+            // Save preaload cars.
+            ModelController().createDefaultData(numberOfObjects: 3)
         }
 
         return true
