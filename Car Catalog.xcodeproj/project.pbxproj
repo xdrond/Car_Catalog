@@ -14,6 +14,9 @@
 		E24C0A0825123A220049A16F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E24C0A0725123A220049A16F /* Assets.xcassets */; };
 		E24C0A0B25123A220049A16F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E24C0A0925123A220049A16F /* LaunchScreen.storyboard */; };
 		E24C0A1325123AF40049A16F /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E24C0A1225123AF40049A16F /* .gitignore */; };
+		E24C0A20251240F10049A16F /* ModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24C0A1F251240F10049A16F /* ModelController.swift */; };
+		E24C0A29251481D80049A16F /* CarMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24C0A27251481D80049A16F /* CarMO+CoreDataClass.swift */; };
+		E24C0A2A251481D80049A16F /* CarMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24C0A28251481D80049A16F /* CarMO+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		E24C0A0A25123A220049A16F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E24C0A0C25123A220049A16F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E24C0A1225123AF40049A16F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		E24C0A1F251240F10049A16F /* ModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelController.swift; sourceTree = "<group>"; };
+		E24C0A27251481D80049A16F /* CarMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E24C0A28251481D80049A16F /* CarMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +76,8 @@
 		E24C0A1425123CAA0049A16F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E24C0A27251481D80049A16F /* CarMO+CoreDataClass.swift */,
+				E24C0A28251481D80049A16F /* CarMO+CoreDataProperties.swift */,
 				E24C0A0425123A220049A16F /* Car_Catalog.xcdatamodeld */,
 			);
 			path = Model;
@@ -90,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				E24C09FD25123A220049A16F /* AppDelegate.swift */,
+				E24C0A1F251240F10049A16F /* ModelController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -167,7 +176,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E24C0A0625123A220049A16F /* Car_Catalog.xcdatamodeld in Sources */,
+				E24C0A20251240F10049A16F /* ModelController.swift in Sources */,
 				E24C0A0025123A220049A16F /* ViewController.swift in Sources */,
+				E24C0A29251481D80049A16F /* CarMO+CoreDataClass.swift in Sources */,
+				E24C0A2A251481D80049A16F /* CarMO+CoreDataProperties.swift in Sources */,
 				E24C09FE25123A220049A16F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
