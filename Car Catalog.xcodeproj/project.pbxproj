@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E24C09FE25123A220049A16F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24C09FD25123A220049A16F /* AppDelegate.swift */; };
-		E24C0A0025123A220049A16F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24C09FF25123A220049A16F /* ViewController.swift */; };
+		E24C0A0025123A220049A16F /* CarsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24C09FF25123A220049A16F /* CarsTableViewController.swift */; };
 		E24C0A0325123A220049A16F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E24C0A0125123A220049A16F /* Main.storyboard */; };
 		E24C0A0625123A220049A16F /* Car_Catalog.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E24C0A0425123A220049A16F /* Car_Catalog.xcdatamodeld */; };
 		E24C0A0825123A220049A16F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E24C0A0725123A220049A16F /* Assets.xcassets */; };
@@ -17,12 +17,13 @@
 		E24C0A20251240F10049A16F /* ModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24C0A1F251240F10049A16F /* ModelController.swift */; };
 		E24C0A29251481D80049A16F /* CarMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24C0A27251481D80049A16F /* CarMO+CoreDataClass.swift */; };
 		E24C0A2A251481D80049A16F /* CarMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24C0A28251481D80049A16F /* CarMO+CoreDataProperties.swift */; };
+		E278CE8325164B1F00B72EDC /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E278CE8225164B1F00B72EDC /* AboutViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E24C09FA25123A220049A16F /* Car Catalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Car Catalog.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E24C09FD25123A220049A16F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E24C09FF25123A220049A16F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E24C09FF25123A220049A16F /* CarsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsTableViewController.swift; sourceTree = "<group>"; };
 		E24C0A0225123A220049A16F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E24C0A0525123A220049A16F /* Car_Catalog.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Car_Catalog.xcdatamodel; sourceTree = "<group>"; };
 		E24C0A0725123A220049A16F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -32,6 +33,7 @@
 		E24C0A1F251240F10049A16F /* ModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelController.swift; sourceTree = "<group>"; };
 		E24C0A27251481D80049A16F /* CarMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E24C0A28251481D80049A16F /* CarMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E278CE8225164B1F00B72EDC /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +91,8 @@
 				E24C0A0925123A220049A16F /* LaunchScreen.storyboard */,
 				E24C0A0125123A220049A16F /* Main.storyboard */,
 				E24C0A0725123A220049A16F /* Assets.xcassets */,
-				E24C09FF25123A220049A16F /* ViewController.swift */,
+				E24C09FF25123A220049A16F /* CarsTableViewController.swift */,
+				E278CE8225164B1F00B72EDC /* AboutViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -177,7 +180,8 @@
 			files = (
 				E24C0A0625123A220049A16F /* Car_Catalog.xcdatamodeld in Sources */,
 				E24C0A20251240F10049A16F /* ModelController.swift in Sources */,
-				E24C0A0025123A220049A16F /* ViewController.swift in Sources */,
+				E24C0A0025123A220049A16F /* CarsTableViewController.swift in Sources */,
+				E278CE8325164B1F00B72EDC /* AboutViewController.swift in Sources */,
 				E24C0A29251481D80049A16F /* CarMO+CoreDataClass.swift in Sources */,
 				E24C0A2A251481D80049A16F /* CarMO+CoreDataProperties.swift in Sources */,
 				E24C09FE25123A220049A16F /* AppDelegate.swift in Sources */,

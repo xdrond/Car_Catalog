@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CarsTableViewController: UITableViewController {
 
     var modelController: ModelController!
 
@@ -17,11 +17,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         modelController = ModelController()
-        cars = try? modelController.retrieveAllCars()!
+
 
         // Do any additional setup after loading the view.
     }
-
 
 }
 
