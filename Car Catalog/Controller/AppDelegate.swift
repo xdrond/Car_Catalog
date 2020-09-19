@@ -24,7 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // A place for actions on the first launch.
         if runCounter() == 1 {
             // Save preaload cars.
-            ModelController().createDefaultData(numberOfObjects: 3)
+            do {
+                try ModelController().createDefaultData()
+            } catch let error as NSError {
+                print("Error creating default data. \(error), \(error.userInfo)")
+            }
         }
 
         return true
@@ -80,6 +84,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+        // Save property by property in changed objects, in this case new data will dominate.
+        container.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+
+        container.viewContext.shouldDeleteInaccessibleFaults = true
+        //  Automatically merge data from multiple contexts.
+        container.viewContext.automaticallyMergesChangesFromParent = true
         return container
     }()
 

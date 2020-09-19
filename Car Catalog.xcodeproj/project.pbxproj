@@ -17,7 +17,6 @@
 		E24C0A20251240F10049A16F /* ModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24C0A1F251240F10049A16F /* ModelController.swift */; };
 		E24C0A29251481D80049A16F /* CarMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24C0A27251481D80049A16F /* CarMO+CoreDataClass.swift */; };
 		E24C0A2A251481D80049A16F /* CarMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24C0A28251481D80049A16F /* CarMO+CoreDataProperties.swift */; };
-		E24C0A2E2515099F0049A16F /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24C0A2D2515099F0049A16F /* Car.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +32,6 @@
 		E24C0A1F251240F10049A16F /* ModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelController.swift; sourceTree = "<group>"; };
 		E24C0A27251481D80049A16F /* CarMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E24C0A28251481D80049A16F /* CarMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		E24C0A2D2515099F0049A16F /* Car.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +79,6 @@
 				E24C0A27251481D80049A16F /* CarMO+CoreDataClass.swift */,
 				E24C0A28251481D80049A16F /* CarMO+CoreDataProperties.swift */,
 				E24C0A0425123A220049A16F /* Car_Catalog.xcdatamodeld */,
-				E24C0A2D2515099F0049A16F /* Car.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -183,7 +180,6 @@
 				E24C0A0025123A220049A16F /* ViewController.swift in Sources */,
 				E24C0A29251481D80049A16F /* CarMO+CoreDataClass.swift in Sources */,
 				E24C0A2A251481D80049A16F /* CarMO+CoreDataProperties.swift in Sources */,
-				E24C0A2E2515099F0049A16F /* Car.swift in Sources */,
 				E24C09FE25123A220049A16F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

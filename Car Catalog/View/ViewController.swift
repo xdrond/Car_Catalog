@@ -17,11 +17,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         modelController = ModelController()
+        cars = try? modelController.retrieveAllCars()!
 
-        // MARK: - Test code, will be removed.
-        for auto in modelController.retrieveData()! {
-            print("\(auto.brand) - \(auto.model)")
-        }
         // Do any additional setup after loading the view.
     }
 

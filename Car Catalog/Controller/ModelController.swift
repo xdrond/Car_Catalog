@@ -23,10 +23,11 @@ struct ModelController {
     }()
 
     /**
-     The method receives CarMO:NSManagedObject and loads it to the storage via newBackgroundContext(). Printing error in case saving fails.
+     The method receives CarMO:NSManagedObject properties and loads it to the storage via newBackgroundContext(). Printing error in case saving fails.
      - parameter carObject:CarMO NSManagedObject for saving.
+     - throws: Returns an error if the object cannot be created. The method prints error position.
      */
-    func createCar(brand: String, model: String, bodyStyle: String?, manufactureYear: String?) {
+    func createCar(brand: String, model: String, bodyStyle: String?, manufactureYear: String?) throws {
 
         ModelController.persistentContainer.newBackgroundContext()
 
@@ -41,50 +42,35 @@ struct ModelController {
         managedContext.insert(newCar)
 
         do {
-            print("managedContext: \(managedContext.insertedObjects)")
             try managedContext.save()
 
         } catch let error as NSError {
-            print("Data could not be saved. \(error), \(error.userInfo)")
+            print("Error creating new data. \(error), \(error.userInfo)")
         }
     }
 
     /**
-     The method creates Car:NSManagedObject objects and fills them with random data. Printing error in case saving fails.
-     - parameter numberOfObjects:UInt Number of generated objects or nothing(default 6).
+     The method creates Car:NSManagedObject objects and fills them with random data. Based on the createCar(brand: String, model: String, bodyStyle: String?, manufactureYear: String?) method.
+     - parameter numberOfObjects:UInt Number of generated objects or nothing(default 3).
+     - throws: Returns an error if the objects cannot be created. The method prints error position.
      */
-    func createDefaultData(numberOfObjects: UInt = 6) {
-
-        ModelController.persistentContainer.newBackgroundContext()
-
-        // Create a context from this container.
-        let managedContext = ModelController.persistentContainer.viewContext
-
-        //  Creating Car:NSManagedObject objects and fill them with random data.
+    func createDefaultData(numberOfObjects: UInt = 3) throws {
         for _ in 1...numberOfObjects {
-            let car = CarMO(context: managedContext)
-            car.brand = carBrands.randomElement()!
-            car.model = carModels.randomElement()!
-            car.bodyStyle = carBodyStyles.randomElement()!
-            car.manufactureYear = carManufactureYears.randomElement()!
-        }
+            do {
+                try createCar(brand: carBrands.randomElement()!, model: carModels.randomElement()!, bodyStyle: carBodyStyles.randomElement()!, manufactureYear: carManufactureYears.randomElement()!)
+            } catch let error as NSError {
+                print("Error loading preloaded data. \(error), \(error.userInfo)")
+            }
 
-        // Set all the values. The next step is to save them inside the Core Data.
-
-        do {
-            print("managedContext: \(managedContext.insertedObjects)")
-            try managedContext.save()
-
-        } catch let error as NSError {
-            print("Data could not be saved. \(error), \(error.userInfo)")
         }
     }
 
     /**
      The method asks for actual data and returns the list of objects. Printing error in case fetching fails.
-     - returns:[Car]? Array of objects from the storage or nil.
+     - returns:[CarMo]? Array of all objects from the storage or nil.
+     - throws: Returns an error if the objects cannot be found or retrieved. The method prints error position.
      */
-    func retrieveData() -> [CarMO]? {
+    func retrieveAllCars() throws -> [CarMO]? {
 
         // Create a context from persistentContainer.
         let managedContext = ModelController.persistentContainer.viewContext
@@ -104,79 +90,55 @@ struct ModelController {
 
 
     /**
-     The method searches for the specified car in the storage and updates the specified data.
-     - bug: Fatal error if the described car is not in the storage.
+     The method receives edited CarMO:NSManagedObject, checks for availability it from the storage via viewContext() and update it.
+     - parameter carObject:CarMO NSManagedObject with edited properties.
+     - throws: Returns an error if the object cannot be found or updated. The method prints error position.
      */
-    func updateData(brand: String, model: String, bodyStyle: String?, manufactureYear: String?) {
+    func updateData(carToUpdate: CarMO) throws {
 
         // Create a context from persistentContainer.
         let managedContext = ModelController.persistentContainer.viewContext
 
-        //Prepare the request of type NSFetchRequest for the entity.
-        let fetchRequest = CarMO.carFetchRequest()
+        //        Prepare the request of type NSFetchRequest for the entity.
+        //        let fetchRequest = CarMO.carFetchRequest()
 
-        fetchRequest.predicate = NSPredicate(format: "brand == %@ AND model == %@ AND bodyStyle == %@ AND manufactureYear == %@", brand, model, bodyStyle ?? "", manufactureYear ?? "")
-        do
-        {
-            let test = try managedContext.fetch(fetchRequest)
+        //        fetchRequest.predicate = NSPredicate(format: "brand == %@ AND model == %@ AND bodyStyle == %@ AND manufactureYear == %@", brand, model, bodyStyle ?? "", manufactureYear ?? "")
 
-            // MARK: - Test code, will be removed.
-
-            let updCar = test[0] as! CarMO
-            updCar.brand = "New updated " + brand
-            updCar.model = "New updated " + model
-            updCar.bodyStyle = "New updated " + (bodyStyle ?? "")
-            updCar.manufactureYear = "New updated " + (manufactureYear ?? "")
-            managedContext.insert(updCar)
-            do{
+        do {
+            try carToUpdate.validateForUpdate()
+            managedContext.insert(carToUpdate)
+            do {
                 try managedContext.save()
+            } catch let error as NSError {
+                print("Context saving error. \(error), \(error.userInfo)")
             }
-            catch
-            {
-                print(error)
-            }
+        } catch let error as NSError {
+            print("The data cannot be updated. \(error), \(error.userInfo)")
         }
-        catch
-        {
-            print(error)
-        }
-
     }
 
     /**
-     The method searches in the storage and deletes the specified car.
-     - bug: Fatal error if the described car is not in the storage.
+     The method receives CarMO:NSManagedObject, checks for availability it from the storage via viewContext() and removes it.
+     - parameter carObject:CarMO NSManagedObject for removes.
+     - throws: Returns an error if the object cannot be found or deleted. The method prints error position.
      */
-    func deleteData(brand: String, model: String, bodyStyle: String?, manufactureYear: String?){
+    func deleteData(carToDelete: CarMO) throws {
 
-        // Create a context from persistentContainer.
         let managedContext = ModelController.persistentContainer.viewContext
 
-        let fetchRequest = CarMO.carFetchRequest()
-
-        fetchRequest.predicate = NSPredicate(format: "brand == %@ AND model == %@ AND bodyStyle == %@ AND manufactureYear == %@", brand, model, bodyStyle ?? "", manufactureYear ?? "")
-
-        do
-        {
-            let test = try managedContext.fetch(fetchRequest)
-
-            let objectToDelete = test[0] as! CarMO
-            managedContext.delete(objectToDelete)
-
-            do{
+        do {
+            try carToDelete.validateForDelete()
+            managedContext.delete(carToDelete)
+            do {
                 try managedContext.save()
+            } catch let error as NSError {
+                print("Context saving error. \(error), \(error.userInfo)")
             }
-            catch
-            {
-                print(error)
-            }
-
-        }
-        catch
-        {
-            print(error)
+        } catch let error as NSError {
+            print("The data cannot be deleted. \(error), \(error.userInfo)")
         }
     }
+
 }
 
 // Preloaded data.
