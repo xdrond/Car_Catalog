@@ -19,32 +19,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="CarCell" textLabel="9Gi-Qn-qjQ" detailTextLabel="VLx-g4-MkA" style="IBUITableViewCellStyleSubtitle" id="m6a-TU-MBD">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CarTableViewCell" textLabel="9Gi-Qn-qjQ" style="IBUITableViewCellStyleDefault" id="m6a-TU-MBD" customClass="CarTableViewCell" customModule="Car_Catalog" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="m6a-TU-MBD" id="pCX-OL-7Ca">
-                                    <rect key="frame" x="0.0" y="0.0" width="362" height="43.5"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="m6a-TU-MBD" id="pCX-OL-7Ca" customClass="CarTableViewCell" customModule="Car_Catalog" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9Gi-Qn-qjQ">
-                                            <rect key="frame" x="20" y="5" width="33.5" height="20.5"/>
+                                            <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VLx-g4-MkA">
-                                            <rect key="frame" x="20" y="25.5" width="33" height="14.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="Guk-yg-ROe" kind="showDetail" identifier="fromCellToAbout" id="A6G-c2-llq"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -52,7 +42,7 @@
                             <outlet property="delegate" destination="KPS-Vy-00U" id="jXN-uh-80N"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Car Catalog" largeTitleDisplayMode="always" id="g29-SM-BTZ"/>
+                    <navigationItem key="navigationItem" title="Car Catalog" id="g29-SM-BTZ"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5fH-Oo-pab" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
