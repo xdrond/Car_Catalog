@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3QZ-L2-trm">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -7,22 +7,214 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Cars Table View Controller-->
+        <scene sceneID="bi3-Jf-OJH">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Car_Catalog" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <tableViewController id="KPS-Vy-00U" userLabel="Cars Table View Controller" customClass="CarsTableViewController" customModule="Car_Catalog" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ki5-YO-Ph8" userLabel="Cars Table View">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CarTableViewCell" textLabel="9Gi-Qn-qjQ" style="IBUITableViewCellStyleDefault" id="m6a-TU-MBD" customClass="CarTableViewCell" customModule="Car_Catalog" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="m6a-TU-MBD" id="pCX-OL-7Ca" customClass="CarTableViewCell" customModule="Car_Catalog" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="376" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9Gi-Qn-qjQ">
+                                            <rect key="frame" x="20" y="0.0" width="356" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Guk-yg-ROe" kind="show" identifier="carDetails" id="R6e-5J-ufJ"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="KPS-Vy-00U" id="4cV-4j-jib"/>
+                            <outlet property="delegate" destination="KPS-Vy-00U" id="jXN-uh-80N"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Car Catalog" id="g29-SM-BTZ">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="2ja-5m-x4K">
+                            <connections>
+                                <segue destination="Guk-yg-ROe" kind="show" identifier="addCar" id="F61-X4-mLi"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5fH-Oo-pab" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="671" y="199"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="CtB-Gg-ib8">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3QZ-L2-trm" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="EWz-fe-fdn">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3bT-77-6JO">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="KPS-Vy-00U" kind="relationship" relationship="rootViewController" id="OAz-Uo-Wqf"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M5F-7g-cIp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-32" y="125"/>
+        </scene>
+        <!--Details View Controller-->
+        <scene sceneID="ST1-98-Pjt">
+            <objects>
+                <viewController id="Guk-yg-ROe" userLabel="Details View Controller" customClass="DetailsViewController" customModule="Car_Catalog" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eII-v5-XW2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillEqually" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="BQH-80-HYv" userLabel="Details Stack View">
+                                <rect key="frame" x="20" y="162" width="374" height="265"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="yem-c7-UXd" userLabel="BrandStackView">
+                                        <rect key="frame" x="0.0" y="0.0" width="150.5" height="46.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brand: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6l-JS-LcK">
+                                                <rect key="frame" x="0.0" y="0.0" width="55" height="46.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" placeholder="brand name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="IJt-q4-Cpm">
+                                                <rect key="frame" x="55" y="0.0" width="95.5" height="46.5"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="IJt-q4-Cpm" secondAttribute="trailing" id="bll-c8-Vxy"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Cqn-Rm-Dqe" userLabel="ModelStackView">
+                                        <rect key="frame" x="0.0" y="54.5" width="154.5" height="46.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Model: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sYl-Y4-GPV" userLabel="Model">
+                                                <rect key="frame" x="0.0" y="0.0" width="56.5" height="46.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" placeholder="model name" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="IfU-LC-6A1" userLabel="model name">
+                                                <rect key="frame" x="56.5" y="0.0" width="98" height="46.5"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="IfU-LC-6A1" secondAttribute="trailing" id="uYr-Sj-Ckq"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Am4-ca-SCQ" userLabel="BodyStackView">
+                                        <rect key="frame" x="0.0" y="109" width="170.5" height="47"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Body type: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Yu-og-BjH" userLabel="Body type:">
+                                                <rect key="frame" x="0.0" y="0.0" width="87" height="47"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" placeholder="body style" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="LGu-MN-Hwu">
+                                                <rect key="frame" x="87" y="0.0" width="83.5" height="47"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="LGu-MN-Hwu" secondAttribute="trailing" id="AvJ-TW-ZUI"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="VdE-8W-CcU" userLabel="YearStackView">
+                                        <rect key="frame" x="0.0" y="164" width="189.5" height="46.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manufacture year: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uoW-xS-XcV">
+                                                <rect key="frame" x="0.0" y="0.0" width="143.5" height="46.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" placeholder=" year " textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="2rm-oS-KaS">
+                                                <rect key="frame" x="143.5" y="0.0" width="46" height="46.5"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="2rm-oS-KaS" secondAttribute="trailing" id="Y4p-hT-wnt"/>
+                                        </constraints>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xbu-7u-TQc">
+                                        <rect key="frame" x="0.0" y="218.5" width="374" height="46.5"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <size key="titleShadowOffset" width="1" height="1"/>
+                                        <state key="normal" title="Save new data">
+                                            <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="saveButton:" destination="Guk-yg-ROe" eventType="touchUpInside" id="SJK-zW-0eI"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="265" id="Egb-Dq-DPh"/>
+                                    <constraint firstItem="xbu-7u-TQc" firstAttribute="width" secondItem="6AC-Jh-iAj" secondAttribute="width" id="lmD-uG-fkJ"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="6AC-Jh-iAj"/>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="BQH-80-HYv" firstAttribute="top" secondItem="LkZ-dv-CXf" secondAttribute="top" constant="22" id="68L-WP-No5"/>
+                            <constraint firstItem="BQH-80-HYv" firstAttribute="width" secondItem="eII-v5-XW2" secondAttribute="height" multiplier="187:448" priority="999" id="HD3-eP-PSC"/>
+                            <constraint firstItem="BQH-80-HYv" firstAttribute="leading" secondItem="LkZ-dv-CXf" secondAttribute="leading" constant="20" id="mPg-UB-Lik"/>
+                            <constraint firstItem="LkZ-dv-CXf" firstAttribute="trailing" secondItem="BQH-80-HYv" secondAttribute="trailing" constant="20" id="yBT-kg-sPw"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="LkZ-dv-CXf"/>
+                    </view>
+                    <connections>
+                        <outlet property="bodyStyleTextField" destination="LGu-MN-Hwu" id="7fi-Cn-JEg"/>
+                        <outlet property="brandTextField" destination="IJt-q4-Cpm" id="kT0-c1-NO3"/>
+                        <outlet property="modelTextField" destination="IfU-LC-6A1" id="Zfl-v3-lyY"/>
+                        <outlet property="saveButtonStyle" destination="xbu-7u-TQc" id="Wye-mA-RWl"/>
+                        <outlet property="yearTextField" destination="2rm-oS-KaS" id="63C-Do-SqX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cyz-Ok-xZ2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1382" y="198"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="F61-X4-mLi"/>
+    </inferredMetricsTieBreakers>
 </document>
