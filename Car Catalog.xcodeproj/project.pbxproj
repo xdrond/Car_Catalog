@@ -17,7 +17,7 @@
 		E24C0A20251240F10049A16F /* ModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24C0A1F251240F10049A16F /* ModelController.swift */; };
 		E24C0A29251481D80049A16F /* CarMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24C0A27251481D80049A16F /* CarMO+CoreDataClass.swift */; };
 		E24C0A2A251481D80049A16F /* CarMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24C0A28251481D80049A16F /* CarMO+CoreDataProperties.swift */; };
-		E278CE8325164B1F00B72EDC /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E278CE8225164B1F00B72EDC /* AboutViewController.swift */; };
+		E278CE8325164B1F00B72EDC /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E278CE8225164B1F00B72EDC /* DetailsViewController.swift */; };
 		E28F1AF925166C280072E512 /* CarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28F1AF825166C280072E512 /* CarTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,7 +34,7 @@
 		E24C0A1F251240F10049A16F /* ModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelController.swift; sourceTree = "<group>"; };
 		E24C0A27251481D80049A16F /* CarMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarMO+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E24C0A28251481D80049A16F /* CarMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		E278CE8225164B1F00B72EDC /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		E278CE8225164B1F00B72EDC /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		E28F1AF825166C280072E512 /* CarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,7 +94,7 @@
 				E24C0A0125123A220049A16F /* Main.storyboard */,
 				E24C0A0725123A220049A16F /* Assets.xcassets */,
 				E24C09FF25123A220049A16F /* CarsTableViewController.swift */,
-				E278CE8225164B1F00B72EDC /* AboutViewController.swift */,
+				E278CE8225164B1F00B72EDC /* DetailsViewController.swift */,
 				E28F1AF825166C280072E512 /* CarTableViewCell.swift */,
 			);
 			path = View;
@@ -184,7 +184,7 @@
 				E24C0A0625123A220049A16F /* Car_Catalog.xcdatamodeld in Sources */,
 				E24C0A20251240F10049A16F /* ModelController.swift in Sources */,
 				E24C0A0025123A220049A16F /* CarsTableViewController.swift in Sources */,
-				E278CE8325164B1F00B72EDC /* AboutViewController.swift in Sources */,
+				E278CE8325164B1F00B72EDC /* DetailsViewController.swift in Sources */,
 				E24C0A29251481D80049A16F /* CarMO+CoreDataClass.swift in Sources */,
 				E24C0A2A251481D80049A16F /* CarMO+CoreDataProperties.swift in Sources */,
 				E28F1AF925166C280072E512 /* CarTableViewCell.swift in Sources */,

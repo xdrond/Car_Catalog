@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if runCounter() == 1 {
             // Save preaload cars.
             do {
-                try ModelController().createDefaultData(numberOfObjects: 26)
+                try ModelController().createDefaultData()
             } catch let error as NSError {
                 print("Error creating default data. \(error), \(error.userInfo)")
             }

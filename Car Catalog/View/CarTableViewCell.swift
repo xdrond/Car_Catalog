@@ -2,7 +2,7 @@
 //  CarCell.swift
 //  Car Catalog
 //
-//  Created by xdrond on 19.09.2020.
+//  Created by xdrond.
 //  Copyright © 2020 romanromanov. All rights reserved.
 //
 
