@@ -54,6 +54,7 @@
 			children = (
 				E24C09FC25123A220049A16F /* Car Catalog */,
 				E24C09FB25123A220049A16F /* Products */,
+				E24C0A1225123AF40049A16F /* .gitignore */,
 			);
 			sourceTree = "<group>";
 		};
@@ -72,7 +73,6 @@
 				E24C0A1525123CB60049A16F /* View */,
 				E24C0A1625123CC60049A16F /* Controller */,
 				E24C0A0C25123A220049A16F /* Info.plist */,
-				E24C0A1225123AF40049A16F /* .gitignore */,
 			);
 			path = "Car Catalog";
 			sourceTree = "<group>";
