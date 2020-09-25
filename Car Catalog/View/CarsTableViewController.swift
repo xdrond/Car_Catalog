@@ -17,21 +17,16 @@ class CarsTableViewController: UITableViewController, PresentUserAlert {
     override func viewDidLoad() {
         super.viewDidLoad()
         modelController = ModelController()
-        do {
-            try cars = modelController.retrieveAllCars()
-            cars!.reverse()
+        cars = modelController.retrieveAllCars()
+        cars!.reverse()
 
-        } catch let error as NSError {
-            presentAlert(errorMessage: error.localizedDescription)
-        }
-        
         self.tableView.dataSource = self
 
     }
 
 
     override func viewDidAppear(_ animated: Bool) {
-        
+
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -41,16 +36,16 @@ class CarsTableViewController: UITableViewController, PresentUserAlert {
         switch segue.identifier {
         case Constants.editSegueID.text:
             if let detailsVC = segue.destination as? DetailsViewController {
-                detailsVC.detailsTitle = .add
+                detailsVC.detailsTitle = .edit
 
                 // Здесь объектом sender является ячейка, на которую нажимает юзер
                 // Получаем indexPath выбранной ячейки с помощью метода indexPathForCell:
                 let index = self.tableView.indexPath(for: (sender as! CarTableViewCell))!.row
                 detailsVC.carForEdit = cars![index]
             }
-        case Constants.editSegueID.text:
+        case Constants.addSegueID.text:
             if let detailsVC = segue.destination as? DetailsViewController {
-                detailsVC.detailsTitle = .edit
+                detailsVC.detailsTitle = .add
             }
         default:
             print("Unknown segue transition.")

@@ -32,11 +32,12 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, PresentUserA
         guard let title = detailsTitle else { return }
         self.navigationItem.title = title.textTitle
 
-        guard let car = carForEdit else { return }
-        brandTextField.text = car.brand
-        modelTextField.text = car.model
-        bodyStyleTextField.text = car.bodyStyle
-        yearTextField.text = car.manufactureYear
+        if let car = carForEdit {
+            brandTextField.text = car.brand
+            modelTextField.text = car.model
+            bodyStyleTextField.text = car.bodyStyle
+            yearTextField.text = car.manufactureYear
+        }
 
         brandTextField.delegate = self
         modelTextField.delegate = self
@@ -61,26 +62,22 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, PresentUserA
         let model = modelTextField.text
         let body = bodyStyleTextField.text
         let year = yearTextField.text
-
-        if !(brand!.isEmpty || model!.isEmpty) {
-            if let car = carForEdit {
-                car.brand = brand!
-                car.model = model!
-                car.bodyStyle = body
-                car.manufactureYear = year
-                do {
-                    try modelController!.updateData(carToUpdate: car)
-                } catch let error as NSError {
-                    presentAlert(errorMessage: error.localizedDescription)
-                }
-            } else {
-                do {
-                    try modelController!.createCar(brand: brand!, model: model!, bodyStyle: body, manufactureYear: year)
-                } catch let error as NSError {
-                    presentAlert(errorMessage: error.localizedDescription)
+        if let modelController = modelController {
+            switch detailsTitle! {
+            case .add:
+                modelController.createCar(brand: brand!,
+                                          model: model!,
+                                          bodyStyle: body,
+                                          manufactureYear: year)
+            case .edit:
+                if let carForEdit = carForEdit {
+                    carForEdit.brand = brand!
+                    carForEdit.model = model!
+                    carForEdit.bodyStyle = body
+                    carForEdit.manufactureYear = year
+                    modelController.updateData(carToUpdate: carForEdit)
                 }
             }
-
         }
 
     }

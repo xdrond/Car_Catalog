@@ -11,38 +11,34 @@ import CoreData
 
 
 /// ModelController can be rewritten with less dependence on the CarMO class.
-struct ModelController {
+class ModelController {
 
-    /// Container is set up in the AppDelegates so we need to refer that container.
+    /// Container is set up in the AppDelegates so we need to refer context from that.
     /// Fatal error if the AppDelegate is unavailable.
-    private static var persistentContainer: NSPersistentContainer = {
+    private static var context: NSManagedObjectContext! = {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             fatalError("No access to the container from \(#file), line: \(#line).")
         }
-        return appDelegate.persistentContainer
+        return appDelegate.persistentContainer.viewContext
     }()
 
     /**
-     The method receives CarMO:NSManagedObject properties and loads it to the storage via newBackgroundContext(). Printing error in case saving fails.
+     The method receives CarMO:NSManagedObject properties and loads it to the storage via context. Printing error in case saving fails.
      - parameter carObject:CarMO NSManagedObject for saving.
-     - throws: Returns an error if the object cannot be created. The method prints error position.
      */
-    func createCar(brand: String, model: String, bodyStyle: String?, manufactureYear: String?) throws {
+    func createCar(brand: String, model: String, bodyStyle: String?, manufactureYear: String?) {
 
-        ModelController.persistentContainer.newBackgroundContext()
+        guard let context = ModelController.context else { return }
 
-        // Create a context from persistentContainer.
-        let managedContext = ModelController.persistentContainer.viewContext
-
-        let newCar = CarMO(context: managedContext)
+        let newCar = CarMO(context: context)
         newCar.brand = brand
         newCar.model = model
         newCar.bodyStyle = bodyStyle
         newCar.manufactureYear = manufactureYear
-        managedContext.insert(newCar)
+        context.insert(newCar)
 
         do {
-            try managedContext.save()
+            try context.save()
 
         } catch let error as NSError {
             print("Error creating new data. \(error), \(error.userInfo)")
@@ -52,34 +48,29 @@ struct ModelController {
     /**
      The method creates Car:NSManagedObject objects and fills them with random data. Based on the createCar(brand: String, model: String, bodyStyle: String?, manufactureYear: String?) method.
      - parameter numberOfObjects:UInt Number of generated objects or nothing(default 3).
-     - throws: Returns an error if the objects cannot be created. The method prints error position.
      */
-    func createDefaultData(numberOfObjects: UInt = 3) throws {
+    func createDefaultData(numberOfObjects: UInt = 3) {
         for _ in 1...numberOfObjects {
-            do {
-                try createCar(brand: carBrands.randomElement()!, model: carModels.randomElement()!, bodyStyle: carBodyStyles.randomElement()!, manufactureYear: carManufactureYears.randomElement()!)
-            } catch let error as NSError {
-                print("Error loading preloaded data. \(error), \(error.userInfo)")
-            }
-
+            createCar(brand: carBrands.randomElement()!,
+                      model: carModels.randomElement()!,
+                      bodyStyle: carBodyStyles.randomElement()!,
+                      manufactureYear: carManufactureYears.randomElement()!)
         }
     }
 
     /**
      The method asks for actual data and returns the list of objects. Printing error in case fetching fails.
      - returns:[CarMo]? Array of all objects from the storage or nil.
-     - throws: Returns an error if the objects cannot be found or retrieved. The method prints error position.
      */
-    func retrieveAllCars() throws -> [CarMO]? {
+    func retrieveAllCars() -> [CarMO]? {
 
-        // Create a context from persistentContainer.
-        let managedContext = ModelController.persistentContainer.viewContext
+        guard let context = ModelController.context else { return nil }
 
         //Prepare the request of type NSFetchRequest for the entity.
         let fetchRequest = CarMO.carFetchRequest()
 
         do {
-            let result = try managedContext.fetch(fetchRequest)
+            let result = try context.fetch(fetchRequest)
             return result
 
         } catch let error as NSError {
@@ -92,12 +83,10 @@ struct ModelController {
     /**
      The method receives edited CarMO:NSManagedObject, checks for availability it from the storage via viewContext() and update it.
      - parameter carObject:CarMO NSManagedObject with edited properties.
-     - throws: Returns an error if the object cannot be found or updated. The method prints error position.
      */
-    func updateData(carToUpdate: CarMO) throws {
+    func updateData(carToUpdate: CarMO) {
 
-        // Create a context from persistentContainer.
-        let managedContext = ModelController.persistentContainer.viewContext
+        guard let context = ModelController.context else { return }
 
         //        Prepare the request of type NSFetchRequest for the entity.
         //        let fetchRequest = CarMO.carFetchRequest()
@@ -106,9 +95,9 @@ struct ModelController {
 
         do {
             try carToUpdate.validateForUpdate()
-            managedContext.insert(carToUpdate)
+            context.insert(carToUpdate)
             do {
-                try managedContext.save()
+                try context.save()
             } catch let error as NSError {
                 print("Context saving error. \(error), \(error.userInfo)")
             }
@@ -120,17 +109,16 @@ struct ModelController {
     /**
      The method receives CarMO:NSManagedObject, checks for availability it from the storage via viewContext() and removes it.
      - parameter carObject:CarMO NSManagedObject for removes.
-     - throws: Returns an error if the object cannot be found or deleted. The method prints error position.
      */
-    func deleteData(carToDelete: CarMO) throws {
+    func deleteData(carToDelete: CarMO) {
 
-        let managedContext = ModelController.persistentContainer.viewContext
+        guard let context = ModelController.context else { return }
 
         do {
             try carToDelete.validateForDelete()
-            managedContext.delete(carToDelete)
+            context.delete(carToDelete)
             do {
-                try managedContext.save()
+                try context.save()
             } catch let error as NSError {
                 print("Context saving error. \(error), \(error.userInfo)")
             }
