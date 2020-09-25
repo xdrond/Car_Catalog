@@ -16,6 +16,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let coreDataModel = "Car_Catalog"
 
+    // MARK: - Core Data stack
+
+    lazy var persistentContainer: NSPersistentContainer = {
+        /*
+         The persistent container for the application. This implementation
+         creates and returns a container, having loaded the store for the
+         application to it. This property is optional since there are legitimate
+         error conditions that could cause the creation of the store to fail.
+         */
+        let container = NSPersistentContainer(name: coreDataModel)
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+
+                /*
+                 Typical reasons for an error here include:
+                 * The parent directory does not exist, cannot be created, or disallows writing.
+                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
+                 * The device is out of space.
+                 * The store could not be migrated to the current model version.
+                 Check the error message to determine what the actual problem was.
+                 */
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        // Save property by property in changed objects, in this case new data will dominate.
+        container.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+
+        container.viewContext.shouldDeleteInaccessibleFaults = true
+        //  Automatically merge data from multiple contexts.
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        return container
+    }()
+
     fileprivate let runCountNamespace = "runCount"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -24,11 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // A place for actions on the first launch.
         if runCounter() == 1 {
             // Save preaload cars.
-            do {
-                try ModelController().createDefaultData()
-            } catch let error as NSError {
-                print("Error creating default data. \(error), \(error.userInfo)")
-            }
+            ModelController().createDefaultData()
         }
 
         return true
@@ -57,41 +88,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
     }
-
-    // MARK: - Core Data stack
-
-    lazy var persistentContainer: NSPersistentContainer = {
-        /*
-         The persistent container for the application. This implementation
-         creates and returns a container, having loaded the store for the
-         application to it. This property is optional since there are legitimate
-         error conditions that could cause the creation of the store to fail.
-        */
-        let container = NSPersistentContainer(name: coreDataModel)
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-
-                /*
-                 Typical reasons for an error here include:
-                 * The parent directory does not exist, cannot be created, or disallows writing.
-                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                 * The device is out of space.
-                 * The store could not be migrated to the current model version.
-                 Check the error message to determine what the actual problem was.
-                 */
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        // Save property by property in changed objects, in this case new data will dominate.
-        container.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
-
-        container.viewContext.shouldDeleteInaccessibleFaults = true
-        //  Automatically merge data from multiple contexts.
-        container.viewContext.automaticallyMergesChangesFromParent = true
-        return container
-    }()
 
     // MARK: - Core Data Saving support
 

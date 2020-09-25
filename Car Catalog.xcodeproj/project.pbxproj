@@ -19,6 +19,7 @@
 		E24C0A2A251481D80049A16F /* CarMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24C0A28251481D80049A16F /* CarMO+CoreDataProperties.swift */; };
 		E278CE8325164B1F00B72EDC /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E278CE8225164B1F00B72EDC /* DetailsViewController.swift */; };
 		E28F1AF925166C280072E512 /* CarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28F1AF825166C280072E512 /* CarTableViewCell.swift */; };
+		E2D2C673251C750800440CD8 /* PersistentContainerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D2C672251C750800440CD8 /* PersistentContainerExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		E24C0A28251481D80049A16F /* CarMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E278CE8225164B1F00B72EDC /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		E28F1AF825166C280072E512 /* CarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarTableViewCell.swift; sourceTree = "<group>"; };
+		E2D2C672251C750800440CD8 /* PersistentContainerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentContainerExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 			children = (
 				E24C09FD25123A220049A16F /* AppDelegate.swift */,
 				E24C0A1F251240F10049A16F /* ModelController.swift */,
+				E2D2C672251C750800440CD8 /* PersistentContainerExtension.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2D2C673251C750800440CD8 /* PersistentContainerExtension.swift in Sources */,
 				E24C0A0625123A220049A16F /* Car_Catalog.xcdatamodeld in Sources */,
 				E24C0A20251240F10049A16F /* ModelController.swift in Sources */,
 				E24C0A0025123A220049A16F /* CarsTableViewController.swift in Sources */,
