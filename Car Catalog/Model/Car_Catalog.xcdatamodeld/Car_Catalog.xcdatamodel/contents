@@ -3,10 +3,11 @@
     <entity name="CarMO" representedClassName="CarMO" syncable="YES">
         <attribute name="bodyStyle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="brand" attributeType="String" syncable="YES"/>
+        <attribute name="lastChange" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="manufactureYear" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="model" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CarMO" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="CarMO" positionX="-63" positionY="-18" width="128" height="120"/>
     </elements>
 </model>

@@ -17,8 +17,9 @@ extension CarMO {
         return NSFetchRequest<CarMO>(entityName: "CarMO")
     }
 
-    @NSManaged public var brand: String
+    @NSManaged public var brand: String 
     @NSManaged public var model: String
+    @NSManaged public var lastChange: Date
     @NSManaged public var manufactureYear: String?
     @NSManaged public var bodyStyle: String?
 

@@ -35,14 +35,9 @@ class ModelController {
         newCar.model = model
         newCar.bodyStyle = bodyStyle
         newCar.manufactureYear = manufactureYear
+        newCar.lastChange = Date()
         context.insert(newCar)
-
-        do {
-            try context.save()
-
-        } catch let error as NSError {
-            print("Error creating new data. \(error), \(error.userInfo)")
-        }
+        saveContext()
     }
 
     /**
@@ -68,9 +63,12 @@ class ModelController {
 
         //Prepare the request of type NSFetchRequest for the entity.
         let fetchRequest = CarMO.carFetchRequest()
+        let sort = NSSortDescriptor(key: "lastChange", ascending: false)
+        fetchRequest.sortDescriptors?.append(sort)
 
         do {
             let result = try context.fetch(fetchRequest)
+            saveContext()
             return result
 
         } catch let error as NSError {
@@ -91,13 +89,23 @@ class ModelController {
         do {
             try carToDelete.validateForDelete()
             context.delete(carToDelete)
-            do {
-                try context.save()
-            } catch let error as NSError {
-                print("Context saving error. \(error), \(error.userInfo)")
-            }
+            saveContext()
         } catch let error as NSError {
             print("The data cannot be deleted. \(error), \(error.userInfo)")
+        }
+    }
+
+    func saveContext() {
+
+        guard let context = ModelController.context else { return }
+        let updatedObjects = context.updatedObjects as! Set<CarMO>
+        for updatedObject in updatedObjects {
+            updatedObject.lastChange = Date()
+        }
+        do {
+            try context.save()
+        } catch let error as NSError {
+            print("Context saving error. \(error), \(error.userInfo)")
         }
     }
 

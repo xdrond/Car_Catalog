@@ -99,9 +99,15 @@ protocol PresentUserAlert {
 
 extension PresentUserAlert {
     func presentAlert(errorMessage: String){
-        let alertController = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+        // create the alert
+        let alert = UIAlertController(title: "Attention!", message: errorMessage, preferredStyle: UIAlertController.Style.alert)
+
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+
+        // show the alert
         if let vc = self as? UIViewController {
-            vc.present(alertController, animated: true, completion: nil)
+            vc.present(alert, animated: true, completion: nil)
         }
     }
 }
