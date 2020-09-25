@@ -10,15 +10,20 @@ import UIKit
 
 class CarsTableViewController: UITableViewController, PresentUserAlert {
 
+    // Constants.
+    let addSegueID = "addCar"
+    let editSegueID = "carDetails"
+    let cellID = "CarTableViewCell"
+
     var modelController: ModelController!
 
-    var cars: [CarMO]?
+    fileprivate var cars = [CarMO]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         modelController = ModelController()
-        cars = modelController.retrieveAllCars()
-        cars!.reverse()
+        cars = modelController.retrieveAllCars()!
+        cars.reverse()
 
         self.tableView.dataSource = self
 
@@ -26,7 +31,7 @@ class CarsTableViewController: UITableViewController, PresentUserAlert {
 
 
     override func viewDidAppear(_ animated: Bool) {
-
+        self.tableView.reloadData()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -34,16 +39,16 @@ class CarsTableViewController: UITableViewController, PresentUserAlert {
         // Pass the selected object to the new view controller.
 
         switch segue.identifier {
-        case Constants.editSegueID.text:
+        case editSegueID:
             if let detailsVC = segue.destination as? DetailsViewController {
                 detailsVC.detailsTitle = .edit
 
                 // Здесь объектом sender является ячейка, на которую нажимает юзер
                 // Получаем indexPath выбранной ячейки с помощью метода indexPathForCell:
                 let index = self.tableView.indexPath(for: (sender as! CarTableViewCell))!.row
-                detailsVC.carForEdit = cars![index]
+                detailsVC.carForEdit = cars[index]
             }
-        case Constants.addSegueID.text:
+        case addSegueID:
             if let detailsVC = segue.destination as? DetailsViewController {
                 detailsVC.detailsTitle = .add
             }
@@ -58,17 +63,15 @@ class CarsTableViewController: UITableViewController, PresentUserAlert {
 
 extension CarsTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cars!.count
+        return cars.count
     }
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: Constants.cellID.text, for: indexPath) as! CarTableViewCell
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! CarTableViewCell
 
-        guard let brand = self.cars?[indexPath.row].brand else { return cell }
-        guard let model = self.cars?[indexPath.row].model else { return cell }
-
-        cell.textLabel?.text = brand + " " + model
+        cell.textLabel?.text = self.cars[indexPath.row].brand
+        cell.detailTextLabel?.text = self.cars[indexPath.row].model
 
         return cell
     }
@@ -76,26 +79,15 @@ extension CarsTableViewController {
     /// Delete car
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            do {
-                try modelController!.deleteData(carToDelete: cars![indexPath.row])
-            } catch let error as NSError {
-                presentAlert(errorMessage: error.localizedDescription)
-            }
-            cars!.remove(at: indexPath.row)
+            modelController!.deleteData(carToDelete: cars[indexPath.row])
+            cars.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
 
 }
 
-enum Constants: String {
-    case addSegueID = "addCar"
-    case editSegueID = "carDetails"
-    case cellID = "CarTableViewCell"
-    var text: String { return self.rawValue}
-}
-
-enum DetailsTitleType: String {
+public enum DetailsTitleType: String {
     case add = "Add car"
     case edit = "Edit details"
     var textTitle: String { return self.rawValue}

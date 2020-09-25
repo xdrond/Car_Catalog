@@ -79,33 +79,7 @@ class ModelController {
         return nil
     }
 
-
-    /**
-     The method receives edited CarMO:NSManagedObject, checks for availability it from the storage via viewContext() and update it.
-     - parameter carObject:CarMO NSManagedObject with edited properties.
-     */
-    func updateData(carToUpdate: CarMO) {
-
-        guard let context = ModelController.context else { return }
-
-        //        Prepare the request of type NSFetchRequest for the entity.
-        //        let fetchRequest = CarMO.carFetchRequest()
-
-        //        fetchRequest.predicate = NSPredicate(format: "brand == %@ AND model == %@ AND bodyStyle == %@ AND manufactureYear == %@", brand, model, bodyStyle ?? "", manufactureYear ?? "")
-
-        do {
-            try carToUpdate.validateForUpdate()
-            context.insert(carToUpdate)
-            do {
-                try context.save()
-            } catch let error as NSError {
-                print("Context saving error. \(error), \(error.userInfo)")
-            }
-        } catch let error as NSError {
-            print("The data cannot be updated. \(error), \(error.userInfo)")
-        }
-    }
-
+    
     /**
      The method receives CarMO:NSManagedObject, checks for availability it from the storage via viewContext() and removes it.
      - parameter carObject:CarMO NSManagedObject for removes.

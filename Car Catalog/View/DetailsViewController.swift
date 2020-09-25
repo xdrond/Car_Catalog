@@ -48,6 +48,14 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, PresentUserA
 
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        do {
+            try carForEdit!.managedObjectContext?.save()
+        } catch let error as NSError {
+            print(error)
+        }
+    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -75,7 +83,6 @@ class DetailsViewController: UIViewController, UITextFieldDelegate, PresentUserA
                     carForEdit.model = model!
                     carForEdit.bodyStyle = body
                     carForEdit.manufactureYear = year
-                    modelController.updateData(carToUpdate: carForEdit)
                 }
             }
         }

@@ -59,11 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // A place for actions on the first launch.
         if runCounter() == 1 {
             // Save preaload cars.
-            do {
-                try ModelController().createDefaultData()
-            } catch let error as NSError {
-                print("Error creating default data. \(error), \(error.userInfo)")
-            }
+            ModelController().createDefaultData()
         }
 
         return true
